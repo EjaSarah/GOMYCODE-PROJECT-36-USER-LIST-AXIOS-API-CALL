@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 // Styled components
 const UserContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   align-items: center;
   margin-top: 20px;
 `;
@@ -26,12 +26,12 @@ const UserCard = styled.div`
 `;
 
 const UserList = () => {
-  const [listOfUser, setListOfUser] = useState([]);
+  const [UserList, setUserList] = useState([]);
 
   useEffect(() => {
     axios.get('https://jsonplaceholder.typicode.com/users')
       .then((response) => {
-        setListOfUser(response.data);
+        setUserList(response.data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -40,15 +40,16 @@ const UserList = () => {
 
   return (
     <UserContainer>
-      {listOfUser.map((user) => (
-        <UserCard key={user.id}>
-          <h2>{user.name}</h2>
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>Username:</strong> {user.username}</p>
-          <p><strong>Phone:</strong> {user.phone}</p>
-          <p><strong>Address:</strong> {`${user.address.street}, ${user.address.suite}, ${user.address.city}, ${user.address.zipcode}`}</p>
-        </UserCard>
-      ))}
+{UserList.map((user) => (
+  <UserCard key={user.id}>
+    <h2>{user.name}</h2>
+    <p><strong>Email:</strong> {user.email}</p>
+    <p><strong>Username:</strong> {user.username}</p>
+    <p><strong>Phone:</strong> {user.phone}</p>
+    <p><strong>Address:</strong> {`${user.address.street}, ${user.address.suite}, ${user.address.city}, ${user.address.zipcode}`}</p>
+  </UserCard>
+))}
+
     </UserContainer>
   );
 };
